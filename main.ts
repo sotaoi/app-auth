@@ -1,4 +1,5 @@
-require('dotenv').config();
+import { config } from '@app/omni/config';
+config('');
 import fs from 'fs';
 import path from 'path';
 import { Store } from '@sotaoi/api/store';
@@ -7,11 +8,13 @@ import { getAppInfo } from '@sotaoi/omni/get-app-info';
 import { connect, mconnect, sconnect } from '@sotaoi/api/db';
 import { oauthAuthorize, verifyToken } from '@sotaoi/api/auth/oauth-authorize';
 import { scopedRequests } from '@sotaoi/api/auth/oauth-authorize';
-import { config } from '@sotaoi/api/config';
 import { oauthProvider } from '@sotaoi/api/auth/oauth-provider';
 import { setVerifyToken } from '@sotaoi/api/routes/oauth-scoped-route';
+import { AppKernel } from '../packages/sotaoi-api/app-kernel';
 
 const { startAuthServer } = require('@sotaoi/auth/auth/app');
+
+new AppKernel().bootstrap(config);
 
 let serverInitInterval: any = null;
 let serverInitTries = 0;
@@ -20,9 +23,9 @@ const main = async (): Promise<void> => {
   try {
     clearTimeout(serverInitInterval);
 
-    const keyPath = path.resolve(process.env.SSL_KEY || '');
-    const certPath = path.resolve(process.env.SSL_CERT || '');
-    const chainPath = path.resolve(process.env.SSL_CA || '');
+    const keyPath = path.resolve(getAppInfo().sslKey);
+    const certPath = path.resolve(getAppInfo().sslCert);
+    const chainPath = path.resolve(getAppInfo().sslCa);
     if (!fs.existsSync(keyPath) || !fs.existsSync(certPath) || !fs.existsSync(chainPath)) {
       if (serverInitTries === 60) {
         console.error('server failed to start because at least one ssl certificate file is missing');
@@ -40,7 +43,7 @@ const main = async (): Promise<void> => {
     await mconnect();
     await sconnect();
 
-    const appInfo = getAppInfo(require('dotenv'));
+    const appInfo = getAppInfo();
     await Store.init(appInfo, {}, {}, scopedRequests());
 
     // start
