@@ -10,7 +10,7 @@ import { oauthAuthorize, verifyToken } from '@sotaoi/api/auth/oauth-authorize';
 import { scopedRequests } from '@sotaoi/api/auth/oauth-authorize';
 import { oauthProvider } from '@sotaoi/api/auth/oauth-provider';
 import { setVerifyToken } from '@sotaoi/api/routes/oauth-scoped-route';
-import { AppKernel } from '../packages/sotaoi-api/app-kernel';
+import { AppKernel } from '@sotaoi/api/app-kernel';
 
 const { startAuthServer } = require('@sotaoi/auth/auth/app');
 
