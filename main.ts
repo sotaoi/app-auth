@@ -1,4 +1,4 @@
-import { config } from '@app/omni/config';
+const { config } = require('@app/omni/config');
 config('');
 import fs from 'fs';
 import path from 'path';
