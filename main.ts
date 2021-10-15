@@ -1,4 +1,4 @@
-const { config } = require('@app/omni/config');
+import { config } from '@app/omni/config';
 config('');
 import fs from 'fs';
 import path from 'path';
@@ -12,15 +12,14 @@ import { oauthProvider } from '@sotaoi/api/auth/oauth-provider';
 import { setVerifyToken } from '@sotaoi/api/routes/oauth-scoped-route';
 import { AppKernel } from '@sotaoi/api/app-kernel';
 
-const { startAuthServer } = require('@sotaoi/auth/auth/app');
-
-new AppKernel().bootstrap(config);
-
 let serverInitInterval: any = null;
 let serverInitTries = 0;
 
 const main = async (): Promise<void> => {
   try {
+    const { startAuthServer } = require('@sotaoi/auth/auth/app');
+    new AppKernel().bootstrap(config);
+
     clearTimeout(serverInitInterval);
 
     const keyPath = path.resolve(getAppInfo().sslKey);
