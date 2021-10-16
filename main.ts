@@ -1,5 +1,4 @@
 import { config } from '@app/omni/config';
-config('');
 import fs from 'fs';
 import path from 'path';
 import { Store } from '@sotaoi/api/store';
