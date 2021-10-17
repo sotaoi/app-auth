@@ -1,20 +1,20 @@
-import { config } from '@app/omni/config';
-import fs from 'fs';
-import path from 'path';
-import { Store } from '@sotaoi/api/store';
-import { logger } from '@sotaoi/api/logger';
-import { getAppInfo } from '@sotaoi/omni/get-app-info';
-import { connect, mconnect, sconnect } from '@sotaoi/api/db';
-import { oauthAuthorize, verifyToken } from '@sotaoi/api/auth/oauth-authorize';
-import { scopedRequests } from '@sotaoi/api/auth/oauth-authorize';
-import { oauthProvider } from '@sotaoi/api/auth/oauth-provider';
-import { setVerifyToken } from '@sotaoi/api/routes/oauth-scoped-route';
-import { AppKernel } from '@sotaoi/api/app-kernel';
+const { config } = require('@app/omni/config');
+const fs = require('fs');
+const path = require('path');
+const { Store } = require('@sotaoi/api/store');
+const { logger } = require('@sotaoi/api/logger');
+const { getAppInfo } = require('@sotaoi/omni/get-app-info');
+const { connect, mconnect, sconnect } = require('@sotaoi/api/db');
+const { oauthAuthorize, verifyToken } = require('@sotaoi/api/auth/oauth-authorize');
+const { scopedRequests } = require('@sotaoi/api/auth/oauth-authorize');
+const { oauthProvider } = require('@sotaoi/api/auth/oauth-provider');
+const { setVerifyToken } = require('@sotaoi/api/routes/oauth-scoped-route');
+const { AppKernel } = require('@sotaoi/api/app-kernel');
 
-let serverInitInterval: any = null;
+let serverInitInterval = null;
 let serverInitTries = 0;
 
-const main = async (): Promise<void> => {
+const main = async () => {
   try {
     const { startAuthServer } = require('@sotaoi/auth/auth/app');
     new AppKernel().bootstrap(config);
@@ -31,7 +31,7 @@ const main = async (): Promise<void> => {
       }
       serverInitTries++;
       console.warn('at least one certificate file is missing. retrying in 5 seconds...');
-      serverInitInterval = setTimeout(async (): Promise<void> => {
+      serverInitInterval = setTimeout(async () => {
         await main();
       }, 5000);
       return;
@@ -54,4 +54,4 @@ const main = async (): Promise<void> => {
   }
 };
 
-export { main };
+module.exports = { main };
