@@ -1,6 +1,5 @@
 const { config } = require('@app/omni/config');
 const fs = require('fs');
-const path = require('path');
 const { Store } = require('@sotaoi/api/store');
 const { logger } = require('@sotaoi/api/logger');
 const { getAppInfo } = require('@sotaoi/omni/get-app-info');
@@ -21,9 +20,9 @@ const main = async () => {
 
     clearTimeout(serverInitInterval);
 
-    const keyPath = path.resolve(getAppInfo().sslKey);
-    const certPath = path.resolve(getAppInfo().sslCert);
-    const chainPath = path.resolve(getAppInfo().sslCa);
+    const keyPath = require.resolve(getAppInfo().sslKey);
+    const certPath = require.resolve(getAppInfo().sslCert);
+    const chainPath = require.resolve(getAppInfo().sslCa);
     if (!fs.existsSync(keyPath) || !fs.existsSync(certPath) || !fs.existsSync(chainPath)) {
       if (serverInitTries === 60) {
         console.error('server failed to start because at least one ssl certificate file is missing');
