@@ -20,11 +20,10 @@
   },
   "devDependencies": {
     "@app/auth": "file:./",
-    "@app/omni": "file:../app-omni",
     "@types/node": "^14"
   },
   "dependencies": {
-    "@app/omni": "git+https://github.com/sotaoi/app-omni#0.9.1",
+    "@app/omni": "file:../app-omni",
     "@sotaoi/api": "git+https://github.com/sotaoi/api#0.9.1",
     "@sotaoi/auth": "git+https://github.com/sotaoi/auth#6.1.1",
     "@sotaoi/omni": "git+https://github.com/sotaoi/omni#0.9.1",
