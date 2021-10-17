@@ -15,6 +15,7 @@
     "restart:auth:prod": "forever restart auth.entry.js",
     "stop:auth:prod": "forever stop auth.entry",
     "deploy:aauth": "node ./scripts/deploy/deploy-aauth",
+    "deploy:reload-aauth": "node ./scripts/deploy/deploy-reload-aauth",
     "clean:aauth": "node ./scripts/clean/clean-aauth"
   },
   "devDependencies": {
