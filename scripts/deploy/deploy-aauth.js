@@ -27,6 +27,8 @@ const main = async () => {
     path.resolve('./tmp.deployment'),
   ]);
 
+  delete packageJson.devDependencies;
+  fs.writeFileSync(path.resolve('./deployment/package.json'), JSON.stringify(packageJson, null, 2));
   execSync('npm run bootstrap:prod', { cwd: path.resolve('./deployment'), stdio: 'inherit' });
 
   fs.renameSync(path.resolve('./tmp.deployment/.git'), path.resolve('./deployment/.git'));
