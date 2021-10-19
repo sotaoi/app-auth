@@ -9,7 +9,6 @@
 /env.json
 
 # app
-/.greenlockrc
 /node_modules
 /storage/*
 !/storage/.gitkeep
