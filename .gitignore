@@ -22,7 +22,3 @@
 # ide
 /.idea
 /.vscode
-
-/deployment/*
-!/deployment/.gitkeep
-/tmp.deployment
