@@ -16,6 +16,7 @@
     "stop:auth:prod": "forever stop auth.entry.js",
     "deploy:aauth": "node ./scripts/deploy/deploy-aauth",
     "deploy:reload-aauth": "node ./scripts/deploy/deploy-reload-aauth",
+    "clean:bootstrap": "node ./scripts/clean/clean-bootstrap",
     "clean:aauth": "node ./scripts/clean/clean-aauth",
     "postinstall": "node ./scripts/hook/hook-postinstall"
   },
