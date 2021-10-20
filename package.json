@@ -7,8 +7,8 @@
     "node": "14.x"
   },
   "scripts": {
-    "bootstrap": "npm install --no-audit --no-fund",
-    "bootstrap:prod": "npm install --production --no-audit --no-fund",
+    "bootstrap": "npm install --legacy-peer-deps --no-audit --no-fund",
+    "bootstrap:prod": "npm install --omit dev --omit optional --no-save --no-audit --no-fund",
     "start:auth": "NODE_ENV=development nodemon --config ./cfg-nodemon-auth.json",
     "start:auth:prod": "NODE_ENV=production forever start -v -c node ./auth.entry.js",
     "start:auth:prod:sim": "NODE_ENV=production node auth.entry",
