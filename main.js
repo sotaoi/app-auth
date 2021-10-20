@@ -47,7 +47,16 @@ const main = async () => {
 
     setVerifyToken(verifyToken);
     const oauthPort = config('app.oauth_port');
-    startAuthServer(oauthPort, oauthProvider(oauthPort), oauthAuthorize);
+    startAuthServer(
+      {
+        SSL_KEY: keyPath,
+        SSL_CERT: certPath,
+        SSL_CA: chainPath,
+      },
+      oauthPort,
+      oauthProvider(oauthPort),
+      oauthAuthorize,
+    );
   } catch (err) {
     logger().estack(err);
   }
