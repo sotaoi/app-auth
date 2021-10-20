@@ -7,8 +7,8 @@
     "node": "14.x"
   },
   "scripts": {
-    "bootstrap": "npm install --legacy-peer-deps --no-audit --no-fund",
-    "bootstrap:prod": "npm install --omit dev --omit optional --no-save --no-audit --no-fund",
+    "bootstrap": "npm install --no-audit --no-fund --no-save",
+    "bootstrap:prod": "npm run bootstrap",
     "start:auth": "NODE_ENV=development nodemon --config ./cfg-nodemon-auth.json",
     "start:auth:prod": "NODE_ENV=production forever start -v -c node ./auth.entry.js",
     "start:auth:prod:sim": "NODE_ENV=production node auth.entry",
@@ -19,12 +19,6 @@
     "clean:bootstrap": "node ./scripts/clean/clean-bootstrap",
     "clean:aauth": "node ./scripts/clean/clean-aauth",
     "postinstall": "node ./scripts/hook/hook-postinstall"
-  },
-  "devDependencies": {
-    "@app/auth": "file:./",
-    "@app/omni": "file:../app-omni",
-    "@sotaoi/auth": "file:../packages/sotaoi-auth",
-    "@types/node": "^14"
   },
   "dependencies": {
     "@app/auth": "file:./",
