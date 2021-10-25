@@ -56,6 +56,9 @@ const main = async () => {
       oauthPort,
       oauthProvider(oauthPort),
       oauthAuthorize,
+      () => {
+        return Store.ensureAppPocket();
+      },
     );
   } catch (err) {
     logger().estack(err);
