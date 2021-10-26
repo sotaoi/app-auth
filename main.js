@@ -1,3 +1,6 @@
+process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
+const { init } = require('@app/omni/init');
+init();
 const { config } = require('@app/omni/config');
 const fs = require('fs');
 const { Store } = require('@sotaoi/api/store');
@@ -15,14 +18,15 @@ let serverInitTries = 0;
 
 const main = async () => {
   try {
-    const { startAuthServer } = require('@sotaoi/auth/auth/app');
-    new AppKernel().bootstrap(config);
-
     clearTimeout(serverInitInterval);
 
-    const keyPath = require.resolve(getAppInfo().sslKey);
-    const certPath = require.resolve(getAppInfo().sslCert);
-    const chainPath = require.resolve(getAppInfo().sslCa);
+    const { startAuthServer } = require('@sotaoi/auth/auth/app');
+    new AppKernel().bootstrap(config);
+    const appInfo = getAppInfo();
+
+    const keyPath = require.resolve(appInfo.sslKey);
+    const certPath = require.resolve(appInfo.sslCert);
+    const chainPath = require.resolve(appInfo.sslCa);
     if (!fs.existsSync(keyPath) || !fs.existsSync(certPath) || !fs.existsSync(chainPath)) {
       if (serverInitTries === 60) {
         console.error('server failed to start because at least one ssl certificate file is missing');
@@ -40,7 +44,6 @@ const main = async () => {
     await mconnect();
     await sconnect();
 
-    const appInfo = getAppInfo();
     await Store.init(appInfo, {}, {}, scopedRequests());
 
     // start
