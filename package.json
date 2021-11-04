@@ -24,7 +24,7 @@
     "@app/auth": "file:./",
     "@app/omni": "git+https://github.com/sotaoi/app-omni#0.9.1",
     "@sotaoi/api": "git+https://github.com/sotaoi/api#0.9.1",
-    "@sotaoi/auth": "git+https://github.com/sotaoi/auth#6.1.1",
+    "@sotaoi/auth": "6.1.1",
     "@sotaoi/omni": "git+https://github.com/sotaoi/omni#0.9.1",
     "forever": "^4.0.1",
     "nodemon": "^2.0.4"
